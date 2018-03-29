@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class Submission extends StatefulWidget {
   @override
@@ -7,7 +10,10 @@ class Submission extends StatefulWidget {
 }
 
 class SubmissionState extends State<Submission> {
+  DatabaseReference database = FirebaseDatabase.instance.reference();
   final TextEditingController _textController = new TextEditingController();
+  GoogleSignIn _googleSignIn = new GoogleSignIn();
+
   Widget _newSubmissionControllerBar() {
     return new Container(
       child: new Card(
@@ -34,6 +40,19 @@ class SubmissionState extends State<Submission> {
     );
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _googleSignIn.signInSilently();
+    FirebaseAuth.instance.signInAnonymously();
+  }
+
+  void _handleSubmitRequest(String text) {
+    database.push().set({'testUser': text});
+    print("Pushed to DB: $text");
+    //sendPressed();
+  }
+
   Widget enterQuestionField() {
     return new Container(
       height: 400.0,
@@ -50,6 +69,7 @@ class SubmissionState extends State<Submission> {
           scrollDirection: Axis.vertical,
           //reverse: true,
           child: new TextField(
+            onSubmitted: _handleSubmitRequest,
             keyboardType: TextInputType.multiline,
             controller: _textController,
             decoration: new InputDecoration(
@@ -66,40 +86,6 @@ class SubmissionState extends State<Submission> {
     );
   }
 
-Widget scrollableQuestionField() {
-  return new Container(
-    color: Colors.grey,
-    padding: new EdgeInsets.all(7.0),
-
-    child: new ConstrainedBox(
-      constraints: new BoxConstraints(
-        minWidth: 200.0,
-        maxWidth: 400.0,
-        minHeight: 50.0,
-        maxHeight: 50.0,
-      ),
-
-      child: new SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        reverse: true,
-
-        // here's the actual text box
-        child: new TextField(
-          keyboardType: TextInputType.multiline,
-          maxLines: null, //grow automatically
-          //focusNode: mrFocus,
-          controller: _textController,
-          //onSubmitted: currentIsComposing ? _handleSubmitted : null,
-          decoration: new InputDecoration.collapsed(
-              hintText: "Please enter a lot of text",
-          ),
-        ),
-        // ends the actual text box
-
-      ),
-    ),
-  );
-}
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +113,7 @@ Widget scrollableQuestionField() {
           new Container(
             padding: const EdgeInsets.only(right: 10.0, top: 10.0, bottom: 10.0),
             child: new RaisedButton(
-              onPressed: sendPressed,
+              onPressed: () => _handleSubmitRequest(_textController.text),
               child: new Row(
                 children: <Widget>[
                   new Icon(Icons.attach_file),
@@ -141,7 +127,7 @@ Widget scrollableQuestionField() {
           new Container(
             padding: const EdgeInsets.only(right: 10.0),
             child: new RaisedButton(
-              onPressed: sendPressed,
+              onPressed: () => _handleSubmitRequest(_textController.text),
               child: new Row(
                 children: <Widget>[
                   new Icon(Icons.send),

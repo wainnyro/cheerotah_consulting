@@ -79,7 +79,7 @@ class HomeState extends State<Home> {
         children: <Widget>[
           summary(),
           new Container(
-            child: new Image.asset("/images/lovemeloveyou.jpg")
+            child: new Image.asset("images/lovemeloveyou.jpg")
           ),
           callToAction(),
           new Container(

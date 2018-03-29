@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "656221921981",
+    "firebase_url": "https://cheerotah-consulting.firebaseio.com",
+    "project_id": "cheerotah-consulting",
+    "storage_bucket": "cheerotah-consulting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656221921981:android:244ca360355bd176",
+        "android_client_info": {
+          "package_name": "com.cheerotah.consulting"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656221921981-72c2bo7b7ck474kischl8hadacbb34jq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cheerotah.consulting",
+            "certificate_hash": "a2cfcdb9837a068125599c4c6d298b3f2e0ecb81"
+          }
+        },
+        {
+          "client_id": "656221921981-0h9it6e3tbom2p2ujqqehec5aoui9eef.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCR6D75xfazNXtCI_6wv2LminBTS8y-9w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656221921981-0h9it6e3tbom2p2ujqqehec5aoui9eef.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
